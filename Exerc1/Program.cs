@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Drawing;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 
 namespace Exerc1
 {
@@ -13,8 +15,11 @@ namespace Exerc1
 
         static void adicionarConta()
         {
-            Console.Write("\nInforme seu CPF: ");
-            string cpf = Console.ReadLine();
+            string cpf = "";
+            do
+            {
+                cpf = ObterEntrada<string>("Informe seu CPF (11 dígitos): ");
+            } while (cpf.Length != 11);
 
             Random random = new Random();
             int identificador = random.Next(10000, 100000);
@@ -28,8 +33,7 @@ namespace Exerc1
         {
             do
             {
-                Console.Write("\n[1] Depositar valor \n[2] Sacar valor \n[3] Exibir saldo \n[4] Exibir extrato \n[5] Sair \n\nEscolha uma opção: ");
-                opcao = int.Parse(Console.ReadLine());
+                opcao = ObterEntrada<int>("[1] Depositar valor \n[2] Sacar valor \n[3] Exibir dados da conta \n[4] Exibir extrato \n[5] Sair \n\nEscolha uma opção: ");
 
                 switch (opcao)
                 {
@@ -40,7 +44,7 @@ namespace Exerc1
                         conta.SacarValor();
                         break;
                     case 3:
-                        conta.ExibirSaldo();
+                        conta.ExibirDadosDaConta();
                         break;
                     case 4:
                         conta.ExibirExtrato();
@@ -52,6 +56,30 @@ namespace Exerc1
                         break;
                 }
             } while (opcao != 5);
+        }
+        static public T ObterEntrada<T>(string mensagem)
+        {
+            while (true)
+            {
+                Console.Write("\n" + mensagem); 
+                string entrada = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(entrada))
+                {
+                    try
+                    {
+                        return (T)Convert.ChangeType(entrada, typeof(T));
+                    }
+                    catch (FormatException) 
+                    {
+                        Console.WriteLine("\nInsira um valor válido.");
+                    }                    
+                }
+                else
+                {
+                    Console.WriteLine("\nNão é permitido valores vazios. Tente novamente!");
+                }
+            }
         }
     }    
 }

@@ -22,8 +22,7 @@ namespace Exerc1
 
         public void DepositarValor()
         {
-            Console.Write("\nDigite o valor que deseja depositar: R$");
-            double valor = double.Parse(Console.ReadLine());
+            double valor = Program.ObterEntrada<double>("\nDigite o valor que deseja depositar: R$");
 
             if (saldo < 0)
             {
@@ -40,8 +39,7 @@ namespace Exerc1
         }
         public void SacarValor()
         {
-            Console.Write("\nDigite o valor que deseja sacar: R$");
-            double valor = double.Parse(Console.ReadLine());
+            double valor = Program.ObterEntrada<double>("\nDigite o valor que deseja depositar: R$");
 
             double max_Saque = saldo + 100;
 
@@ -56,15 +54,15 @@ namespace Exerc1
                 extrato.Push($"Saque: R${valor}");
             }
         }
-        public void ExibirSaldo()
+        public void ExibirDadosDaConta()
         {
-            if(saldo > 0)
+            if(saldo >= 0)
             {
-                Console.WriteLine($"\nO saldo positivo da conta é R${saldo}");
+                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo positivo da conta é R${saldo}");
             }
             else
             {
-                Console.WriteLine($"\nO saldo negativo da conta é R${saldo}");
+                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo negativo da conta é R${saldo}");
             }
         }
         public double CalcularTaxaDeDeposito(double valor)
@@ -83,8 +81,9 @@ namespace Exerc1
             else
             {
                 string elementoDoExtrato = extrato.Pop();
-                Console.WriteLine(elementoDoExtrato);
+                Console.WriteLine("\n" + elementoDoExtrato);
             }
         }
+
     }
 }
