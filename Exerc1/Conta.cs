@@ -84,6 +84,5 @@ namespace Exerc1
                 Console.WriteLine("\n" + elementoDoExtrato);
             }
         }
-
     }
 }
