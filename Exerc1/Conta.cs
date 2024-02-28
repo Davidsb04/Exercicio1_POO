@@ -8,12 +8,12 @@ namespace Exerc1
 {
     internal class Conta
     {
-        private Stack<string> extrato = new Stack<string>(10);
+        private Stack<string> extrato = new Stack<string>();
         private double saldo;
-        private int identificador;
-        private string CPF;
+        public string identificador { get; private set; }
+        public string CPF { get; private set; }
 
-        public Conta(string cpf, int identificador)
+        public Conta(string cpf, string identificador)
         {
             saldo = 0;
             CPF = cpf;
@@ -39,11 +39,11 @@ namespace Exerc1
         }
         public void SacarValor()
         {
-            double valor = Program.ObterEntrada<double>("\nDigite o valor que deseja depositar: R$");
+            double valor = Program.ObterEntrada<double>("\nDigite o valor que deseja sacar: R$");
 
             double max_Saque = saldo + 100;
 
-            if(valor > max_Saque)
+            if (valor > max_Saque)
             {
                 Console.WriteLine("\nEsse valor ultrapassa o limite para o saque!");
             }
@@ -56,7 +56,7 @@ namespace Exerc1
         }
         public void ExibirDadosDaConta()
         {
-            if(saldo >= 0)
+            if (saldo >= 0)
             {
                 Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo positivo da conta é R${saldo}");
             }
@@ -74,15 +74,23 @@ namespace Exerc1
         
         public void ExibirExtrato()
         {
-            if(extrato.Count == 0)
+            string[] extratoClonado = extrato.ToArray();
+
+            if (extrato.Count == 0)
             {
                 Console.WriteLine("\nNão foram feitas transações na conta.");
             }
             else
             {
-                string elementoDoExtrato = extrato.Pop();
-                Console.WriteLine("\n" + elementoDoExtrato);
-            }
-        }
+                string ultimoElementoDoExtrato = extrato.Peek();
+                Console.WriteLine("\nA última movimentação feita foi " + ultimoElementoDoExtrato);
+
+                Console.WriteLine("\nAs 10 últimas movimentações da conta são:");
+                for (int i = 0; i < extratoClonado.Length && i < 10; i++)
+                {
+                    Console.WriteLine(extratoClonado[i]);
+                }
+            }            
+        }        
     }
 }
