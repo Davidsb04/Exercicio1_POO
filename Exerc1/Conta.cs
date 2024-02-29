@@ -26,7 +26,7 @@ namespace Exerc1
 
             if (saldo < 0)
             {
-                saldo += CalcularTaxaDeDeposito(valor);
+                saldo += valor - (valor * 0.03);
                 Console.WriteLine("\nDeposito com taxa de 3% realizado com sucesso!");
                 extrato.Push($"Deposito: R${valor}");
             }
@@ -58,20 +58,13 @@ namespace Exerc1
         {
             if (saldo >= 0)
             {
-                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo positivo da conta é R${saldo}");
+                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo positivo da conta é {saldo.ToString("C")}");
             }
             else
             {
-                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo negativo da conta é R${saldo}");
+                Console.WriteLine($"\nCPF: {CPF}\nIdentificador: {identificador}\nO saldo negativo da conta é {saldo.ToString("C")}");
             }
-        }
-        public double CalcularTaxaDeDeposito(double valor)
-        {
-            double taxa = saldo * 0.03;
-
-            return valor += taxa;
-        }
-        
+        }        
         public void ExibirExtrato()
         {
             string[] extratoClonado = extrato.ToArray();
