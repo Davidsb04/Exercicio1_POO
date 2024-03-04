@@ -16,7 +16,7 @@ Este é um sistema bancário desenvolvido em C#, que permite aos usuários criar
 
 - **Exibir Extrato**: Os usuários podem visualizar o extrato de sua conta bancária, que mostra as últimas movimentações realizadas, incluindo depósitos e saques.
 
-- **OBS**: Se o usuário utilizou o limite e realizar um próximo depósito, será aplicada uma taxa de desconto de 3% sobre o valor negativo na conta para compensar o saldo negativo.
+- **OBS**: Se o usuário utilizou o limite e realizar um próximo depósito, será aplicada uma taxa de desconto de 3% sobre o valor depositado na conta para compensar o saldo negativo.
 
 ## Uso
 
